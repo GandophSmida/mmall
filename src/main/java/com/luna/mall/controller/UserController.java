@@ -19,7 +19,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "/login.do", method = RequestMethod.POST)
+    @RequestMapping(value = "login.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<User> login(String username, String password, HttpSession session){
         ServerResponse<User> response = userService.login(username,password);
@@ -29,26 +29,26 @@ public class UserController {
         return response;
     }
 
-    @RequestMapping(value = "/logout.do", method = RequestMethod.POST)
+    @RequestMapping(value = "logout.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<String> logout(HttpSession session){
         session.removeAttribute(Constants.CURRENT_USER);
         return ServerResponse.createBySuccess();
     }
 
-    @RequestMapping(value = "/register.do", method = RequestMethod.POST)
+    @RequestMapping(value = "register.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<User> register(User user){
         return userService.register(user);
     }
 
-    @RequestMapping(value = "/validate.do", method = RequestMethod.POST)
+    @RequestMapping(value = "validate.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<String> validate(String type, String value){
         return userService.validate(type,value);
     }
 
-    @RequestMapping(value = "/getUserInfo.do", method = RequestMethod.POST)
+    @RequestMapping(value = "getUserInfo.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<User> getUserInfo(HttpSession session){
         User user = (User)session.getAttribute(Constants.CURRENT_USER);
@@ -58,25 +58,25 @@ public class UserController {
         return ServerResponse.createByErrorMessage("用户未登录，无法获取当前登录信息");
     }
 
-    @RequestMapping(value = "/getUserQuestion.do", method = RequestMethod.POST)
+    @RequestMapping(value = "getUserQuestion.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<String> getUserQuestion(String username){
         return userService.selectQuestion(username);
     }
 
-    @RequestMapping(value = "/checkUserAnswer.do", method = RequestMethod.POST)
+    @RequestMapping(value = "checkUserAnswer.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<String> checkUserAnswer(String username, String question, String answer){
         return userService.checkUserAnswer(username, question, answer);
     }
 
-    @RequestMapping(value = "/forgetResetPassword.do", method = RequestMethod.POST)
+    @RequestMapping(value = "forgetResetPassword.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<String> forgetResetPassword(String username, String newPassword, String forgetToken){
         return userService.forgetResetPassword(username, newPassword, forgetToken);
     }
 
-    @RequestMapping(value = "/resetPassword.do", method = RequestMethod.POST)
+    @RequestMapping(value = "resetPassword.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<String> resetPassword(HttpSession session, String passwordOld, String passwordNew){
         User user = (User)session.getAttribute(Constants.CURRENT_USER);
@@ -86,7 +86,7 @@ public class UserController {
         return userService.resetPassword(passwordOld,passwordNew,user);
     }
 
-    @RequestMapping(value = "/updateUserInfo.do", method = RequestMethod.POST)
+    @RequestMapping(value = "updateUserInfo.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<User> updateUserInfo(HttpSession session, User user){
         User currentUser = (User)session.getAttribute(Constants.CURRENT_USER);
@@ -102,7 +102,7 @@ public class UserController {
         return response;
     }
 
-    @RequestMapping(value = "/getUserDetail.do", method = RequestMethod.POST)
+    @RequestMapping(value = "getUserDetail.do", method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<User> getUserDetail(HttpSession session){
         User currentUser = (User)session.getAttribute(Constants.CURRENT_USER);

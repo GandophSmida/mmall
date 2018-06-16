@@ -168,4 +168,16 @@ public class UserServiceImpl implements UserService {
         user.setPassword(StringUtils.EMPTY);
         return ServerResponse.createBySeccessData(user);
     }
+
+    /**
+     * 校验是否是管理员
+     * @param user
+     * @return
+     */
+    public ServerResponse checkAdminRole(User user){
+        if(user != null && user.getRole().intValue()==Constants.Role.ROLR_ADMIN){
+            return ServerResponse.createBySuccess();
+        }
+        return ServerResponse.createByError();
+    }
 }
