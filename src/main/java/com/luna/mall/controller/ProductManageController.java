@@ -111,7 +111,7 @@ public class ProductManageController {
     @RequestMapping("upload.do")
     @ResponseBody
     public ServerResponse upload(HttpSession session, @RequestParam(value = "uploadFile", required = false)MultipartFile file, HttpServletRequest request){
-       /* User user = (User)session.getAttribute(Constants.CURRENT_USER);
+       User user = (User)session.getAttribute(Constants.CURRENT_USER);
         if(null == user){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录，请登录");
         }
@@ -125,14 +125,7 @@ public class ProductManageController {
             return ServerResponse.createBySeccessData(fileMap);
         }else{
             return ServerResponse.createByErrorMessage("无权限操作，需要管理员权限");
-        }*/
-        String path = request.getSession().getServletContext().getRealPath("upload");
-        String targetFileName = fileService.upload(file, path);
-        String url = PropertiesUtil.getProperty("ftp.server.http.prefix")+targetFileName;
-        Map fileMap = Maps.newHashMap();
-        fileMap.put("uri", targetFileName);
-        fileMap.put("url", url);
-        return ServerResponse.createBySeccessData(fileMap);
+        }
     }
 
     @RequestMapping("richImageUpload.do")
