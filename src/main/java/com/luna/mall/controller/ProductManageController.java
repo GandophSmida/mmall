@@ -24,7 +24,7 @@ import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/product/")
+@RequestMapping("/productManager/")
 public class ProductManageController {
 
     @Autowired
@@ -72,7 +72,7 @@ public class ProductManageController {
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录，请登录");
         }
         if(userService.checkAdminRole(user).isSuccess()){
-            return productService.getProductDetail(productId);
+            return productService.getManagerProductDetail(productId);
         }else{
             return ServerResponse.createByErrorMessage("无权限操作，需要管理员权限");
         }

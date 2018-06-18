@@ -65,7 +65,7 @@ public class CategoryServiceImpl implements CategoryService {
      * @param categoryId
      * @return
      */
-    public ServerResponse selectChildrenParallelCategory(Integer categoryId){
+    public ServerResponse<List<Integer>> selectChildrenParallelCategory(Integer categoryId){
         Set<Category> categorySet = Sets.newHashSet();
         findChildCategory(categorySet, categoryId);
         List<Integer> categoryIdList = Lists.newArrayList();
