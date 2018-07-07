@@ -27,7 +27,7 @@
     from mmall_shipping
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <insert id="insert" parameterType="com.luna.mall.pojo.Shipping" >
+  <insert id="insert" parameterType="com.luna.mall.pojo.Shipping" useGeneratedKeys="true" keyProperty="id">
     insert into mmall_shipping (id, user_id, receive_name, 
       receive_mobile, receive_phone, receive_province, 
       receive_city, receive_district, receive_address, 
@@ -171,4 +171,38 @@
       update_time = now()
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <delete id="deleteByShippingIdAndUserId" parameterType="map">
+    delete from mmall_shipping
+    where id = #{shippingId}
+    and user_id = #{userId}
+  </delete>
+  <update id="updateShipping" parameterType="com.luna.mall.pojo.Shipping">
+    update mmall_shipping
+    set
+      receive_name = #{receiveName,jdbcType=VARCHAR},
+      receive_mobile = #{receiveMobile,jdbcType=VARCHAR},
+      receive_phone = #{receivePhone,jdbcType=VARCHAR},
+      receive_province = #{receiveProvince,jdbcType=VARCHAR},
+      receive_city = #{receiveCity,jdbcType=VARCHAR},
+      receive_district = #{receiveDistrict,jdbcType=VARCHAR},
+      receive_address = #{receiveAddress,jdbcType=VARCHAR},
+      receive_zip = #{receiveZip,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = now()
+    where id = #{id,jdbcType=INTEGER}
+    and user_id = #{userId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByShippingIdAndUserId" resultMap="BaseResultMap" parameterType="map">
+    select
+    <include refid="Base_Column_List" />
+    from mmall_shipping
+    where id = #{shippingId}
+    and user_id = #{userId}
+  </select>
+  <select id="selectByUserId" resultMap="BaseResultMap" parameterType="map">
+    select
+    <include refid="Base_Column_List" />
+    from mmall_shipping
+    where user_id = #{userId}
+  </select>
 </mapper>
