@@ -3,6 +3,8 @@ package com.luna.mall.dao;
 import com.luna.mall.pojo.Order;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 public interface OrderMapper {
     int insert(Order record);
 
@@ -17,4 +19,8 @@ public interface OrderMapper {
     Order selectByUserIdAndOrderNo(@Param("userId")Integer userId, @Param("orderNo")Long orderNo);
 
     Order selectByOrderNo(Long orderNo);
+
+    List<Order> selectByUserId(Integer userId);
+
+    List<Order> selectAllOrder();
 }
