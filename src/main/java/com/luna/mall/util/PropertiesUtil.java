@@ -14,7 +14,7 @@ public class PropertiesUtil {
     private static Properties props;
 
     static {
-        String fileName = "src/main/resources.beta/mall.properties";
+        String fileName = "mall.properties";
         props = new Properties();
         try {
             props.load(new InputStreamReader(PropertiesUtil.class.getClassLoader().getResourceAsStream(fileName), "UTF-8"));
@@ -38,6 +38,40 @@ public class PropertiesUtil {
             value = defaultValue;
         }
         return value.trim();
+    }
+
+    public static Integer getIntProperty(String key) {
+        String value = props.getProperty(key.trim());
+        if (StringUtils.isBlank(value)) {
+            return null;
+        }
+        return Integer.parseInt(value.trim());
+    }
+
+    public static Integer getIntProperty(String key, String defaultValue) {
+
+        String value = props.getProperty(key.trim());
+        if (StringUtils.isBlank(value)) {
+            value = defaultValue;
+        }
+        return Integer.parseInt(value.trim());
+    }
+
+    public static Boolean getBooleanProperty(String key) {
+        String value = props.getProperty(key.trim());
+        if (StringUtils.isBlank(value)) {
+            return null;
+        }
+        return Boolean.parseBoolean(value.trim());
+    }
+
+    public static Boolean getBooleanProperty(String key, String defaultValue) {
+
+        String value = props.getProperty(key.trim());
+        if (StringUtils.isBlank(value)) {
+            value = defaultValue;
+        }
+        return Boolean.parseBoolean(value.trim());
     }
 
 }
