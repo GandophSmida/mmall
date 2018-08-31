@@ -2,11 +2,11 @@ package com.luna.mall.serivce.impl;
 
 import com.luna.mall.common.Constants;
 import com.luna.mall.common.ServerResponse;
-import com.luna.mall.common.TokenCache;
 import com.luna.mall.dao.UserMapper;
 import com.luna.mall.pojo.User;
 import com.luna.mall.serivce.UserService;
 import com.luna.mall.util.Md5Util;
+import com.luna.mall.util.RedisPoolUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -96,7 +96,7 @@ public class UserServiceImpl implements UserService {
         int resultCount = userMapper.checkUserAnswer(username, question, answer);
         if(resultCount>0){
             String forgetToken = UUID.randomUUID().toString();
-            TokenCache.setKey(TokenCache.TOKEN_PREFIX+username, forgetToken);
+            RedisPoolUtil.setEx(Constants.TOKEN_PREFIX+username,forgetToken,60*60*12);
             return ServerResponse.createBySeccessMessage(forgetToken);
         }
         return ServerResponse.createByErrorMessage("问题的答案错误");
@@ -110,7 +110,7 @@ public class UserServiceImpl implements UserService {
         if(serverResponse.isSuccess()){
             return ServerResponse.createByErrorMessage("用户不存在");
         }
-        String token = TokenCache.getKey(TokenCache.TOKEN_PREFIX+username);
+        String token = RedisPoolUtil.get(Constants.TOKEN_PREFIX+username);
         if(StringUtils.isBlank(token)){
             return ServerResponse.createByErrorMessage("token无效或者过期");
         }
