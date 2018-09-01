@@ -7,7 +7,7 @@ import com.luna.mall.serivce.CategoryService;
 import com.luna.mall.serivce.UserService;
 import com.luna.mall.util.CookieUtil;
 import com.luna.mall.util.JsonUtil;
-import com.luna.mall.util.RedisPoolUtil;
+import com.luna.mall.util.RedisShardedPoolUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,7 +36,7 @@ public class CategoryManageController {
         if(StringUtils.isEmpty(loginToken)){
             return ServerResponse.createByErrorMessage("用户未登录，无法获取当前登录信息");
         }
-        String userJson = RedisPoolUtil.get(loginToken);
+        String userJson = RedisShardedPoolUtil.get(loginToken);
         User user = JsonUtil.string2Obj(userJson,User.class);
         if(null == user){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录，请登录");
@@ -55,7 +55,7 @@ public class CategoryManageController {
         if(StringUtils.isEmpty(loginToken)){
             return ServerResponse.createByErrorMessage("用户未登录，无法获取当前登录信息");
         }
-        String userJson = RedisPoolUtil.get(loginToken);
+        String userJson = RedisShardedPoolUtil.get(loginToken);
         User user = JsonUtil.string2Obj(userJson,User.class);
         if(null == user){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录，请登录");
@@ -75,7 +75,7 @@ public class CategoryManageController {
         if(StringUtils.isEmpty(loginToken)){
             return ServerResponse.createByErrorMessage("用户未登录，无法获取当前登录信息");
         }
-        String userJson = RedisPoolUtil.get(loginToken);
+        String userJson = RedisShardedPoolUtil.get(loginToken);
         User user = JsonUtil.string2Obj(userJson,User.class);
         if(null == user){ //查询子节点的category信息，并且不递归保持平级
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录，请登录");
@@ -95,7 +95,7 @@ public class CategoryManageController {
         if(StringUtils.isEmpty(loginToken)){
             return ServerResponse.createByErrorMessage("用户未登录，无法获取当前登录信息");
         }
-        String userJson = RedisPoolUtil.get(loginToken);
+        String userJson = RedisShardedPoolUtil.get(loginToken);
         User user = JsonUtil.string2Obj(userJson,User.class);
         if(null == user){ //查询当前子节点的id和递归子节点的id
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),"用户未登录，请登录");

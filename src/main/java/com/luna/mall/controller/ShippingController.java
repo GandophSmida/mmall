@@ -8,7 +8,7 @@ import com.luna.mall.pojo.User;
 import com.luna.mall.serivce.ShippingService;
 import com.luna.mall.util.CookieUtil;
 import com.luna.mall.util.JsonUtil;
-import com.luna.mall.util.RedisPoolUtil;
+import com.luna.mall.util.RedisShardedPoolUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,7 +31,7 @@ public class ShippingController {
         if(StringUtils.isEmpty(loginToken)){
             return ServerResponse.createByErrorMessage("添加商品失败，用户未登录，无法获取当前登录信息");
         }
-        String userJson = RedisPoolUtil.get(loginToken);
+        String userJson = RedisShardedPoolUtil.get(loginToken);
         User user = JsonUtil.string2Obj(userJson,User.class);
         if(user == null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
@@ -46,7 +46,7 @@ public class ShippingController {
         if(StringUtils.isEmpty(loginToken)){
             return ServerResponse.createByErrorMessage("删除商品失败，用户未登录，无法获取当前登录信息");
         }
-        String userJson = RedisPoolUtil.get(loginToken);
+        String userJson = RedisShardedPoolUtil.get(loginToken);
         User user = JsonUtil.string2Obj(userJson,User.class);
         if(user == null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
@@ -61,7 +61,7 @@ public class ShippingController {
         if(StringUtils.isEmpty(loginToken)){
             return ServerResponse.createByErrorMessage("用户未登录，无法获取当前登录信息");
         }
-        String userJson = RedisPoolUtil.get(loginToken);
+        String userJson = RedisShardedPoolUtil.get(loginToken);
         User user = JsonUtil.string2Obj(userJson,User.class);
         if(user == null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
@@ -76,7 +76,7 @@ public class ShippingController {
         if(StringUtils.isEmpty(loginToken)){
             return ServerResponse.createByErrorMessage("用户未登录，无法获取当前登录信息");
         }
-        String userJson = RedisPoolUtil.get(loginToken);
+        String userJson = RedisShardedPoolUtil.get(loginToken);
         User user = JsonUtil.string2Obj(userJson,User.class);
         if(user == null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());
@@ -93,7 +93,7 @@ public class ShippingController {
         if(StringUtils.isEmpty(loginToken)){
             return ServerResponse.createByErrorMessage("用户未登录，无法获取当前登录信息");
         }
-        String userJson = RedisPoolUtil.get(loginToken);
+        String userJson = RedisShardedPoolUtil.get(loginToken);
         User user = JsonUtil.string2Obj(userJson,User.class);
         if(user == null){
             return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(),ResponseCode.NEED_LOGIN.getDesc());

@@ -12,8 +12,8 @@ public class RedisPool {
     private static Integer minIdle=Integer.parseInt(PropertiesUtil.getProperty("redis.min.idle","2")); //最小空闲连接数
     private static Boolean testOnBorrow=Boolean.parseBoolean(PropertiesUtil.getProperty("redis.max.total","true")); //取用校验
     private static Boolean testOnReturn=Boolean.parseBoolean(PropertiesUtil.getProperty("redis.max.total","true")); //归还校验
-    private static String redisIp=PropertiesUtil.getProperty("redis.ip"); //最小空闲连接数
-    private static Integer redisPort=Integer.parseInt(PropertiesUtil.getProperty("redis.port")); //最小空闲连接数
+    private static String redisIp=PropertiesUtil.getProperty("redis1.ip"); //最小空闲连接数
+    private static Integer redisPort=Integer.parseInt(PropertiesUtil.getProperty("redis1.port")); //最小空闲连接数
     private static void initPool(){
         JedisPoolConfig jedisPoolConfig = new JedisPoolConfig();
         jedisPoolConfig.setMaxTotal(maxTotal);
