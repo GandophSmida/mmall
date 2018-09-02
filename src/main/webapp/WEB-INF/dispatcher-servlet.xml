@@ -39,4 +39,13 @@
         <property name="defaultEncoding" value="UTF-8"></property>
     </bean>
 
+    <mvc:interceptors>
+        <!--定义在这里的所有的都会被拦截-->
+        <mvc:interceptor>
+            <mvc:mapping path="/manage/**"/>
+            <!--防止陷入拦截器的死循环1：拦截器排除法放过不需要拦截的登录请求-->
+            <!--<mvc:exclude-mapping path="/manage/user/login.do"></mvc:exclude-mapping>-->
+            <bean class="com.luna.mall.controller.common.interceptor.AuthorityInterceptor"></bean>
+        </mvc:interceptor>
+    </mvc:interceptors>
 </beans>

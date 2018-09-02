@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
-@RequestMapping("/category/")
+@RequestMapping("/manage/category/")
 public class CategoryManageController {
 
     @Autowired
@@ -32,7 +32,7 @@ public class CategoryManageController {
     @RequestMapping(value = "addCategory.do", method = RequestMethod.POST)
     public ServerResponse addCategory(HttpServletRequest request, String categoryName,
                                       @RequestParam(value = "parentId",defaultValue = "0") int parentId){
-        String loginToken = CookieUtil.readLoginToken(request);
+        /*String loginToken = CookieUtil.readLoginToken(request);
         if(StringUtils.isEmpty(loginToken)){
             return ServerResponse.createByErrorMessage("用户未登录，无法获取当前登录信息");
         }
@@ -45,13 +45,16 @@ public class CategoryManageController {
             return categoryService.addCategory(categoryName, parentId);
         }else{
             return ServerResponse.createByErrorMessage("无权限操作，需要管理员权限");
-        }
+        }*/
+
+        //全部通过拦截器验证是否登录以及权限
+        return categoryService.addCategory(categoryName, parentId);
     }
 
     @ResponseBody
     @RequestMapping(value = "setCategoryName.do", method = RequestMethod.POST)
     public ServerResponse setCategoryName(HttpServletRequest request, Integer categoryId, String categoryName){
-        String loginToken = CookieUtil.readLoginToken(request);
+        /*String loginToken = CookieUtil.readLoginToken(request);
         if(StringUtils.isEmpty(loginToken)){
             return ServerResponse.createByErrorMessage("用户未登录，无法获取当前登录信息");
         }
@@ -64,14 +67,17 @@ public class CategoryManageController {
             return categoryService.updateCategoryName(categoryId,categoryName);
         }else{
             return ServerResponse.createByErrorMessage("无权限操作，需要管理员权限");
-        }
+        }*/
+
+        //全部通过拦截器验证是否登录以及权限
+        return categoryService.updateCategoryName(categoryId,categoryName);
     }
 
     @RequestMapping(value = "getCategory.do", method = RequestMethod.GET)
     @ResponseBody
     public ServerResponse getChildrenParallelCategory(
             HttpServletRequest request, @RequestParam(value = "categoryId", defaultValue = "0") Integer categoryId){
-        String loginToken = CookieUtil.readLoginToken(request);
+        /*String loginToken = CookieUtil.readLoginToken(request);
         if(StringUtils.isEmpty(loginToken)){
             return ServerResponse.createByErrorMessage("用户未登录，无法获取当前登录信息");
         }
@@ -84,14 +90,17 @@ public class CategoryManageController {
             return categoryService.getChildrenParallelCategory(categoryId);
         }else{
             return ServerResponse.createByErrorMessage("无权限操作，需要管理员权限");
-        }
+        }*/
+
+        //全部通过拦截器验证是否登录以及权限
+        return categoryService.getChildrenParallelCategory(categoryId);
     }
 
     @ResponseBody
     @RequestMapping(value = "getDeepCategory.do", method = RequestMethod.GET)
     public ServerResponse getCategoryAndDeepChildrenCategory(
             HttpServletRequest request, @RequestParam(value = "categoryId", defaultValue = "0") Integer categoryId){
-        String loginToken = CookieUtil.readLoginToken(request);
+        /*String loginToken = CookieUtil.readLoginToken(request);
         if(StringUtils.isEmpty(loginToken)){
             return ServerResponse.createByErrorMessage("用户未登录，无法获取当前登录信息");
         }
@@ -104,6 +113,9 @@ public class CategoryManageController {
             return categoryService.selectChildrenParallelCategory(categoryId);
         }else{
             return ServerResponse.createByErrorMessage("无权限操作，需要管理员权限");
-        }
+        }*/
+
+        //全部通过拦截器验证是否登录以及权限
+        return categoryService.selectChildrenParallelCategory(categoryId);
     }
 }
