@@ -18,7 +18,7 @@ public class UserSpringSessionController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "login.do", method = RequestMethod.POST)
+    @RequestMapping(value = "login.do", method = RequestMethod.GET)
     @ResponseBody
     public ServerResponse<User> login(String username, String password, HttpSession session){
         ServerResponse<User> response = userService.login(username,password);
@@ -28,14 +28,14 @@ public class UserSpringSessionController {
         return response;
     }
 
-    @RequestMapping(value = "logout.do", method = RequestMethod.POST)
+    @RequestMapping(value = "logout.do", method = RequestMethod.GET)
     @ResponseBody
     public ServerResponse<String> logout(HttpSession session){
         session.removeAttribute(Constants.CURRENT_USER);
         return ServerResponse.createBySuccess();
     }
 
-    @RequestMapping(value = "getUserInfo.do", method = RequestMethod.POST)
+    @RequestMapping(value = "getUserInfo.do", method = RequestMethod.GET)
     @ResponseBody
     public ServerResponse<User> getUserInfo(HttpSession session){
         User user = (User)session.getAttribute(Constants.CURRENT_USER);
