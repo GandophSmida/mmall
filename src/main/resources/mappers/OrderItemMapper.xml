@@ -179,7 +179,7 @@
       )
     </foreach>
   </insert>
-  <select id="getOrderNo">
+  <select id="getOrderNo" resultMap="BaseResultMap" parameterType="java.lang.Long">
     select
     <include refid="Base_Column_List"></include>
     from mmall_order_item
